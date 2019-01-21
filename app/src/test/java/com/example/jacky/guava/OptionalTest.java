@@ -1,21 +1,21 @@
 package com.example.jacky.guava;
 
-import com.Utils;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Optional;
+import com.google.common.testing.NullPointerTester;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Set;
+import java.util.Collections;
 
 
 @GwtCompatible(emulated = true)
 public class OptionalTest extends TestCase {
-
     @GwtIncompatible // suite
     public static junit.framework.Test suite() {
         TestSuite suite = new TestSuite(OptionalTest.class.getSimpleName());
@@ -25,31 +25,14 @@ public class OptionalTest extends TestCase {
 
     @Test
     public void testForCommonOption() {
-        final Optional<Integer> optional = Optional.of(5);
-        if (optional.isPresent()) {
-            Utils.println(optional.get());
-        }
+        Assert.assertSame(Optional.of(5).get(), 5);
+        Assert.assertSame(Optional.of(5).orNull(), 5);
+        Assert.assertSame(Optional.absent().or(5), 5);
+        Assert.assertSame(Optional.fromNullable(null).orNull(), null);
+        Assert.assertFalse(Optional.absent().isPresent());
 
-//        Assert.assertNotEquals(, );
-//        Optional.absent().isPresent()
+        Assert.assertArrayEquals(Optional.of(5).asSet().toArray(), new Integer[]{5});
+        Assert.assertSame(Optional.absent().asSet(), Collections.emptySet());
     }
 
-    @Test
-    public void testForOr() {
-        //        Utils.println(Optional.fromNullable(null).get());          fail
-
-        Utils.println(Optional.of(5).orNull());
-        Utils.println(Optional.fromNullable(null).orNull());
-        Utils.println(Optional.absent().or(5));
-
-    }
-
-    @Test
-    public void testAsset() {
-        final Set<Integer> integers = Optional.of(5).asSet();       //Returns an immutable singleton Set containing the instance in this Optional
-        Utils.println(integers);
-
-        final Set<Object> collections = Optional.absent().asSet();      //empty list
-        Utils.println(collections);
-    }
 }

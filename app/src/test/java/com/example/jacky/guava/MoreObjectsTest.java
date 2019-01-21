@@ -1,16 +1,29 @@
 package com.example.jacky.guava;
 
-import com.Utils;
+import com.google.common.annotations.GwtCompatible;
+import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Optional;
 
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
+import org.junit.Assert;
 import org.junit.Test;
 
-public class MoreObjectsTest {
+@GwtCompatible(emulated = true)
+public class MoreObjectsTest extends TestCase {
+    @GwtIncompatible // suite
+    public static junit.framework.Test suite() {
+        TestSuite suite = new TestSuite(MoreObjectsTest.class.getSimpleName());
+        suite.addTestSuite(MoreObjectsTest.class);
+        return suite;
+    }
+
+
     @Test
-    public void moreObject_test() {
+    public void testForCommon() {
         //if both of the inputs are null, it fails fast with a NullPointerException
-        final Integer result = MoreObjects.firstNonNull(Optional.<Integer>absent().or(5), null);
-        Utils.println(result);
+        Assert.assertSame(MoreObjects.firstNonNull(Optional.<Integer>absent().or(5), null), 5);
     }
 }
