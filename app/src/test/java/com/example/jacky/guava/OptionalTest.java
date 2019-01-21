@@ -24,17 +24,18 @@ public class OptionalTest extends TestCase {
     }
 
     @Test
-    public void option_test() {
+    public void testForCommonOption() {
         final Optional<Integer> optional = Optional.of(5);
         if (optional.isPresent()) {
             Utils.println(optional.get());
         }
 
-        Utils.println(Optional.absent().isPresent());
+//        Assert.assertNotEquals(, );
+//        Optional.absent().isPresent()
     }
 
     @Test
-    public void or_test() {
+    public void testForOr() {
         //        Utils.println(Optional.fromNullable(null).get());          fail
 
         Utils.println(Optional.of(5).orNull());
@@ -44,7 +45,7 @@ public class OptionalTest extends TestCase {
     }
 
     @Test
-    public void asset_test() {
+    public void testAsset() {
         final Set<Integer> integers = Optional.of(5).asSet();       //Returns an immutable singleton Set containing the instance in this Optional
         Utils.println(integers);
 
