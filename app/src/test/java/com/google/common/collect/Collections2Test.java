@@ -1,11 +1,9 @@
-package com.example.jacky.guava.collections;
+package com.google.common.collect;
 
 import com.Utils;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Ordering;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -47,7 +45,6 @@ public class Collections2Test extends TestCase {
         List<Integer> list = newArrayList(1, 1, 2, 2);
         Iterator<List<Integer>> permutations =
                 Collections2.orderedPermutations(list, Ordering.natural()).iterator();
-
         assertNextPermutation(newArrayList(1, 1, 2, 2), permutations);
         assertNextPermutation(newArrayList(1, 2, 1, 2), permutations);
         assertNextPermutation(newArrayList(1, 2, 2, 1), permutations);

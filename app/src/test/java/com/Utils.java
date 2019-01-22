@@ -15,19 +15,42 @@ public class Utils {
         }
     }
 
+    public static <T> void print(Collection<T> collections) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (T collection : collections) {
+            stringBuilder.append(collection).append("\t");
+        }
+        println(stringBuilder.toString());
+    }
+
+
     public static void println(Object o) {
         if (o instanceof String) {
-            printlnInternal((String) o);
+            printInternal((String) o, true);
         } else if (o instanceof Integer) {
-            printlnInternal(String.valueOf(o));
+            printInternal(String.valueOf(o), true);
         } else {
-            printlnInternal(String.valueOf(o));
+            printInternal(String.valueOf(o), true);
         }
     }
 
-    private static void printlnInternal(String o) {
+    public static void print(Object o) {
+        if (o instanceof String) {
+            printInternal((String) o, false);
+        } else if (o instanceof Integer) {
+            printInternal(String.valueOf(o), false);
+        } else {
+            printInternal(String.valueOf(o), false);
+        }
+    }
+
+    private static void printInternal(String o, boolean enter) {
         if (o != null) {
-            System.out.println("Thread:" + Thread.currentThread() + ",\t" + o);
+            if (enter) {
+                System.out.println("Thread:" + Thread.currentThread() + ",\t" + o);
+            } else {
+                System.out.print("Thread:" + Thread.currentThread() + ",\t" + o);
+            }
         }
 
     }

@@ -31,4 +31,5 @@ dependencies {
 //    api 'com.google.guava:guava:27.0.1-jre'
     api 'com.google.guava:guava:27.0.1-android'
     testImplementation group: 'com.google.guava', name: 'guava-testlib', version: '11.0.1'
+    testImplementation group: 'com.google.truth', name: 'truth', version: '0.42'
 }

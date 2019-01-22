@@ -1,4 +1,4 @@
-package com.example.jacky.guava.collections;
+package com.google.common.collect;
 
 import junit.framework.TestCase;
 
