@@ -64,6 +64,18 @@ public class OrderingTest extends TestCase {
         return Ordering.natural().onResultOf(CharAtFunction.values()[index]);
     }
 
+    public void testCommon() {
+        final List<String> source = Lists.newArrayList("z", "a", "dd", null, "n");
+        assertThat(Ordering.natural().nullsLast().nullsFirst().sortedCopy(source))
+                .containsExactlyElementsIn(Lists.newArrayList(null, "a", "dd", "n", "z"))
+                .inOrder();
+
+        assertThat(Ordering.natural().nullsLast().nullsFirst().<String>reverse().sortedCopy(source))
+                .containsExactlyElementsIn(Lists.newArrayList("z", "n", "dd", "a", null))
+                .inOrder();
+
+    }
+
     private static void runLeastOfComparison(int iterations, int elements, int seeds) {
         Random random = new Random(42);
         Ordering<Integer> ordering = Ordering.natural();
@@ -146,17 +158,6 @@ public class OrderingTest extends TestCase {
         List<String> strings = ImmutableList.of("b", "a", "d", "c");
         assertEquals(strings, comparator.sortedCopy(strings));
         assertEquals(strings, comparator.immutableSortedCopy(strings));
-    }
-
-    public void testCommon() {
-        final List<String> source = Lists.newArrayList("z", "a", "dd", null, "n");
-        assertThat(Ordering.natural().nullsLast().nullsFirst().sortedCopy(source))
-                .containsExactlyElementsIn(Lists.newArrayList(null, "a", "dd", "n", "z"))
-                .inOrder();
-
-        assertThat(Ordering.natural().nullsLast().nullsFirst().<String>reverse().sortedCopy(source))
-                .containsExactlyElementsIn(Lists.newArrayList("z", "n", "dd", "a", null))
-                .inOrder();
     }
 
     // From https://github.com/google/guava/issues/1342
